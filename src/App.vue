@@ -1,37 +1,27 @@
 <template>
   <div id="app">
-
+   <Header />
   </div>
 </template>
 
 <script>
-
+import Header from '@/components/Header.vue';
 export default {
   name: 'App',
+  components:{
+    Header
+  }
 }
 </script>
 
 <style>
-
-body, h1, h2, ul, li, p {
-  padding: 0px;
-  margin: 0px;
-}
-
-ul {
-  list-style: none;
-}
-
 * {
+  margin:0;
+  padding:0;
   box-sizing: border-box;
 }
 
-body {
-  background: linear-gradient(to right, #1a1a1a 30%, #ffffff 30%);
-  font-family: 'Poppins', sans-serif;
+html {
+  font-family:'Poppins', sans-serif;
 }
-
-#app {
-  padding: 0 80px;
-  }
 </style>
