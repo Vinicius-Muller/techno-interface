@@ -1,32 +1,65 @@
 <template>
-  <header>
-    <img class="logo" src="@/assets/techno.svg" alt="Techno">
-    <img class="wallet" src="@/assets/carrinho.svg" alt="Wallet">
+  <header class="header"> 
+    <img class="logo" src="../assets/techno.svg" alt="Techno">
+
+    <div class="carrinho_menu" @click="carrinhoAtivo = true">{{carrinhoTotal | numeroPreco}} | {{carrinho.length}}</div>
+    
   </header>
 </template>
 
 <script>
 export default {
-  name:"Header"
+  name:"Header",
+  data() {
+    return {
+      carrinho:[],
+    carrinhoAtivo:false,
+    }
+  },
+  computed: {
+    carrinhoTotal() {
+      let total = 0
+      if(this.carrinho.length) {
+        this.carrinho.forEach(item => {
+          total += item.preco;
+        })
+      }
+      return total;
+    }
+  },
+    filters: {
+    numeroPreco(valor) {
+      return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
+    }
+  },
 }
 </script>
 
 <style scoped>
-header {
-  width:100vw;
-  height:100px;
+.header {
   display: flex;
   justify-content: space-between;
-  background: transparent;
+  max-width: 900px;
+  padding: 20px 0;
+  margin:0 auto;
 }
 
-header .logo {
-  width: 100px;
-  height: 50px;
-  padding-left: 50px;
+.logo {
+  width: 80px;
 }
 
-header .wallet {
-  padding-right: 50px;
+.carrinho_menu::after {
+content: "";
+display: inline-block;
+background: url("../assets/carrinho.svg") no-repeat center center;
+width: 25px;
+height: 25px;
+margin-left: 10px;
+}
+
+.carrinho_menu {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 </style>

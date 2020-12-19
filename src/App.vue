@@ -24,4 +24,8 @@ export default {
 html {
   font-family:'Poppins', sans-serif;
 }
+
+body {
+   background: linear-gradient(to right, #1a1a1a 30%, #ffffff 30%);
+}
 </style>
