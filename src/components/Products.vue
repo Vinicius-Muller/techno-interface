@@ -14,7 +14,6 @@
       </div>
 
    </section>
-
    
 </div>
 </template>
@@ -24,6 +23,7 @@ export default {
   name:"Products",
    data() {
     return {
+      produto:false,
       produtos:[
         {
     id: "notebook",
@@ -96,4 +96,5 @@ export default {
 .produto_preco {
   color: rgba(0, 0, 0, .5);
 }
+
 </style>
