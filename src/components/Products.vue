@@ -3,7 +3,7 @@
 <div>
   <section class="produtos">
 
-      <div v-for="produto in produtos" @click="abrirModal(produto.id)" :key="produto.id" class="produto">
+      <div v-for="(produto,index) in produtos" @click="abrirModal(index)" :key="index" class="produto">
         <img :src="require(`@/assets/produtos/${produto.img}`)" :alt="produto.nome" class="produto_img">
 
         <div class="produto_info">
@@ -11,6 +11,12 @@
         <h2 class="produto_titulo">{{produto.nome}}</h2>
         </div>
         
+      </div>
+
+      <div v-if="modal" class="modal" v-bind="{modal}">
+        <div class="modal-content">
+          <img :src="require(`@/assets/produtos/${modal.img}`)" alt="modal.id">
+        </div>
       </div>
 
    </section>
@@ -23,7 +29,7 @@ export default {
   name:"Products",
    data() {
     return {
-      produto:false,
+      modal:[],
       produtos:[
         {
     id: "notebook",
@@ -59,8 +65,8 @@ export default {
     }
   },
   methods: {
-    abrirModal(id) {
-      console.log(id)
+    abrirModal(index) {
+      this.modal = this.produtos[index]
     }
   },
   filters: {
@@ -72,6 +78,17 @@ export default {
 </script>
 
 <style scoped>
+
+.modal {
+  position:absolute;
+  z-index:2;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .8);
+}
+
 .produtos {
   max-width: 900px;
   margin-top: 100px;
