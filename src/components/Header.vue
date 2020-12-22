@@ -1,8 +1,14 @@
 <template>
   <header class="header"> 
     <img class="logo" src="../assets/techno.svg" alt="Techno">
+  
+    <div class="carrinho_menu" @click="abrirCarrinho()">
+      <p v-if="carrinho">{{carrinho.preco | numeroPreco}}</p>
+    </div>
 
-    <div class="carrinho_menu" @click="carrinhoAtivo = true">{{carrinhoTotal | numeroPreco}} | {{carrinho.length}}</div>
+    <div v-if="carrinhoAtivo" class="modal_carrinho">
+      {{carrinho}}
+    </div>
     
   </header>
 </template>
@@ -10,21 +16,16 @@
 <script>
 export default {
   name:"Header",
+  props:["carrinho"],
   data() {
     return {
-      carrinho:[],
     carrinhoAtivo:false,
     }
   },
-  computed: {
-    carrinhoTotal() {
-      let total = 0
-      if(this.carrinho.length) {
-        this.carrinho.forEach(item => {
-          total += item.preco;
-        })
-      }
-      return total;
+  
+  methods:{
+    abrirCarrinho() {
+      this.carrinhoAtivo = true
     }
   },
     filters: {
@@ -61,5 +62,13 @@ margin-left: 10px;
   display: flex;
   align-items: center;
   cursor: pointer;
+}
+
+.modal_carrinho {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background:rgba(0, 0, 0, 0.8)
 }
 </style>

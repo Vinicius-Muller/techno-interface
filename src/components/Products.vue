@@ -1,6 +1,7 @@
 <template>
 
 <div>
+  <Header :carrinho="carrinho" />
   <section class="produtos">
 
       <div v-for="(produto,index) in produtos" @click="abrirModal(index)" :key="index" class="produto">
@@ -20,6 +21,7 @@
           <div class="price-box">
             <h2>{{modal.nome}}</h2>
             <p>{{modal.preco | numeroPreco}}</p>
+            <button @click="Comprar()" class="buy">Comprar</button>
           </div>
         </div>
       </div>
@@ -30,11 +32,16 @@
 </template>
 
 <script>
+import Header from '@/components/Header.vue'
 export default {
   name:"Products",
+  components: {
+    Header
+  },
    data() {
     return {
       modal:[],
+      carrinho:[],
       modalActive:false,
       produtos:[
         {
@@ -77,19 +84,16 @@ export default {
     },
     fecharModal() {
       this.modalActive = false
+    },
+    Comprar() {
+      this.carrinho = this.modal
+      console.log(this.carrinho)
     }
   },
   filters: {
     numeroPreco(valor) {
       return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
     }
-  },
-  mounted() {
-    const modalBackground = document.querySelector('div.modal');
-    modalBackground.addEventListener('click', ()=> {
-      this.modalActive = false
-    })
-    console.log(modalBackground)
   }
 }
 </script>
@@ -135,7 +139,7 @@ export default {
 
 .modal-content img {
   width: 60%;
-  height: 50%;
+  height: 80%;
 }
 
 .modal-content .price-box {
@@ -153,6 +157,25 @@ export default {
 .modal-content .price-box p {
   font-size: 1.4rem;
   color: orange;
+}
+
+.modal-content .price-box .buy {
+  width: 50%;
+  height: 40px;
+  margin-top: 50px;
+  border-radius: 5px;
+  border:1px solid orange;
+  font-size: 1.3rem;
+  cursor: pointer;
+  background-color: orange;
+  color: white;
+  transition: 0.2s all;
+}
+
+.modal-content .price-box .buy:hover {
+  background-color: white;
+  color: orange;
+  border:1px solid orange;
 }
 
 .produtos {
