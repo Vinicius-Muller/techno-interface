@@ -13,9 +13,14 @@
         
       </div>
 
-      <div v-if="modal" class="modal" v-bind="{modal}">
+      <div v-if="modalActive" class="modal" v-bind="{modal}">
         <div class="modal-content">
-          <img :src="require(`@/assets/produtos/${modal.img}`)" alt="modal.id">
+          <img @click="fecharModal()" class="close" src="@/assets/cancel.svg" alt="fechar modal">
+          <img :src="require(`@/assets/produtos/${modal.img}`)" :alt="modal.nome">
+          <div class="price-box">
+            <h2>{{modal.nome}}</h2>
+            <p>{{modal.preco | numeroPreco}}</p>
+          </div>
         </div>
       </div>
 
@@ -30,6 +35,7 @@ export default {
    data() {
     return {
       modal:[],
+      modalActive:false,
       produtos:[
         {
     id: "notebook",
@@ -67,6 +73,10 @@ export default {
   methods: {
     abrirModal(index) {
       this.modal = this.produtos[index]
+      this.modalActive = true
+    },
+    fecharModal() {
+      this.modalActive = false
     }
   },
   filters: {
@@ -74,12 +84,22 @@ export default {
       return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
     }
   },
+  mounted() {
+    const modalBackground = document.querySelector('div.modal');
+    modalBackground.addEventListener('click', ()=> {
+      this.modalActive = false
+    })
+    console.log(modalBackground)
+  }
 }
 </script>
 
 <style scoped>
 
 .modal {
+  display: flex;
+  align-items:center;
+  justify-content: center;
   position:absolute;
   z-index:2;
   width: 100%;
@@ -87,6 +107,52 @@ export default {
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, .8);
+}
+
+.modal-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  width: 80%;
+  height: 80%;
+  background: linear-gradient(to right, black 250px, white 250px);
+}
+
+.modal-content .close {
+  width:30px;
+  height:30px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor:pointer;
+  transition: 0.2s all;
+}
+
+.modal-content .close:hover {
+  transform: scale(1.1);
+}
+
+.modal-content img {
+  width: 60%;
+  height: 50%;
+}
+
+.modal-content .price-box {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-content .price-box h2 {
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+
+.modal-content .price-box p {
+  font-size: 1.4rem;
+  color: orange;
 }
 
 .produtos {
