@@ -3,11 +3,16 @@
     <img class="logo" src="../assets/techno.svg" alt="Techno">
   
     <div class="carrinho_menu" @click="abrirCarrinho()">
-      <p v-if="carrinho">{{carrinho.preco | numeroPreco}}</p>
+      <p>{{carrinhoTotal | numeroPreco}}</p>
+      
     </div>
 
     <div v-if="carrinhoAtivo" class="modal_carrinho">
-      {{carrinho}}
+      <section class="carrinho_content">
+        <div class="carrinho_item" v-for="(item, index) in carrinho" :key="index">
+          {{carrinho.length}}
+        </div>
+      </section>
     </div>
     
   </header>
@@ -22,6 +27,18 @@ export default {
     carrinhoAtivo:false,
     }
   },
+
+  computed: {
+    carrinhoTotal() {
+      let total = 0
+      if(this.carrinho.length) {
+        this.carrinho.forEach(item => {
+          total += item.preco;
+        })
+      }
+      return total;
+    }
+  },
   
   methods:{
     abrirCarrinho() {
@@ -32,7 +49,7 @@ export default {
     numeroPreco(valor) {
       return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
     }
-  },
+  }
 }
 </script>
 
@@ -65,10 +82,20 @@ margin-left: 10px;
 }
 
 .modal_carrinho {
-  position: absolute;
+  position: fixed;
   z-index: 2;
   width: 100%;
   height: 100%;
-  background:rgba(0, 0, 0, 0.8)
+  background:rgba(0, 0, 0, 0.8);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_carrinho .carrinho_content {
+  width: 80%;
+  height: 80%;
+  background: white;
+  position: relative;
 }
 </style>

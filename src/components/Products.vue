@@ -14,9 +14,9 @@
         
       </div>
 
-      <div v-if="modalActive" class="modal" v-bind="{modal}">
+      <div v-if="modalActive" class="modal" v-bind="{modal}" @click="fecharModal">
         <div class="modal-content">
-          <img @click="fecharModal()" class="close" src="@/assets/cancel.svg" alt="fechar modal">
+          <img @click="fecharModal" class="close" src="@/assets/cancel.svg" alt="fechar modal">
           <img :src="require(`@/assets/produtos/${modal.img}`)" :alt="modal.nome">
           <div class="price-box">
             <h2>{{modal.nome}}</h2>
@@ -27,12 +27,11 @@
       </div>
 
    </section>
-   
 </div>
 </template>
 
 <script>
-import Header from '@/components/Header.vue'
+import Header from '@/components/Header.vue';
 export default {
   name:"Products",
   components: {
@@ -82,12 +81,14 @@ export default {
       this.modal = this.produtos[index]
       this.modalActive = true
     },
-    fecharModal() {
+    fecharModal({target, currentTarget}) {
+      if(target === currentTarget) {
       this.modalActive = false
+    }
     },
     Comprar() {
-      this.carrinho = this.modal
-      console.log(this.carrinho)
+      this.modalActive = false
+      this.carrinho.push(this.modal);
     }
   },
   filters: {
@@ -104,7 +105,7 @@ export default {
   display: flex;
   align-items:center;
   justify-content: center;
-  position:absolute;
+  position:fixed;
   z-index:2;
   width: 100%;
   height: 100%;
