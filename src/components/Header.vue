@@ -7,20 +7,25 @@
       
     </div>
 
-    <div v-if="carrinhoAtivo" class="modal_carrinho">
+    <div v-if="carrinhoAtivo" class="modal_carrinho" @click="fecharCarrinho">
       <section class="carrinho_content">
         <div class="carrinho_item" v-for="(item, index) in carrinho" :key="index">
-          {{carrinho.length}}
+          <Carousel :item="item"/>
+          <h2>{{item.nome}}</h2>
+          <p>{{item.preco}}</p>
         </div>
       </section>
     </div>
-    
   </header>
 </template>
 
 <script>
+import Carousel from '@/components/Carousel.vue';
 export default {
   name:"Header",
+  components: {
+    Carousel
+  },
   props:["carrinho"],
   data() {
     return {
@@ -43,6 +48,11 @@ export default {
   methods:{
     abrirCarrinho() {
       this.carrinhoAtivo = true
+    },
+    fecharCarrinho({target, currentTarget}) {
+      if(target === currentTarget) {
+      this.carrinhoAtivo = false
+    }
     }
   },
     filters: {
