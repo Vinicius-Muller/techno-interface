@@ -20,7 +20,20 @@
           </div>
           </div>
         </div>
-        <input type="checkbox">
+        <div style="display:flex;">
+        <div style="display:flex; flex-direction:column; align-items: center; margin-left:130px;">
+          <input type="checkbox">
+          <img class="card" src="@/assets/visa.svg" alt="pague com visa">
+        </div>
+        <div style="display:flex; flex-direction:column; align-items: center; margin-left:30px;">
+          <input type="checkbox">
+          <img class="card" src="@/assets/mastercard.svg" alt="pague com mastercard">
+        </div>
+        <p style="margin-left:220px;">Total | {{carrinhoTotal | numeroPreco}}</p>
+        </div>
+        <div style="display:flex; justify-content:center;">
+        <button class="buy">Comprar</button>
+        </div>
       </section>
     </div>
   </header>
@@ -71,10 +84,8 @@ export default {
 <style scoped>
 .header {
   display: flex;
-  justify-content: space-between;
-  max-width: 900px;
-  padding: 20px 0;
-  margin:0 auto;
+  justify-content: space-around;
+  height:50px;
 }
 
 .logo {
@@ -116,6 +127,30 @@ margin-left: 10px;
 
 .modal_carrinho .carrinho_content .carrinho_item {
   display:flex;
+}
+
+.modal_carrinho .carrinho_content .card {
+  width:50px;
+  height: 30px;
+}
+
+.modal_carrinho .carrinho_content .buy {
+  width: 30%;
+  height: 50px;
+  cursor: pointer;
+  border: none;
+  border-radius: 20px;
+  font-size: 1.4rem;
+  color: white;
+  background-color: #00bfff;
+  margin-top: 50px;
+  transition: 0.3s all;
+}
+
+.modal_carrinho .carrinho_content .buy:hover {
+  color:#00bfff;
+  background-color: white;
+  border:1px solid #00bfff;
 }
 
 .modal_carrinho .carrinho_content .carrinho_item .item {
