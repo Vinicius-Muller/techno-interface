@@ -4,16 +4,23 @@
   
     <div class="carrinho_menu" @click="abrirCarrinho()">
       <p>{{carrinhoTotal | numeroPreco}}</p>
-      
     </div>
 
     <div v-if="carrinhoAtivo" class="modal_carrinho" @click="fecharCarrinho">
       <section class="carrinho_content">
-        <div class="carrinho_item" v-for="(item, index) in carrinho" :key="index">
-          <Carousel :item="item"/>
-          <h2>{{item.nome}}</h2>
-          <p>{{item.preco}}</p>
+        <div class="carrinho_item">
+          <Carousel :carrinho="carrinho"/>
+          <div style="width:50%; padding:10px;">
+          <div class="item" v-for="(info, index) in carrinho" :key="index">
+            <h2>{{info.nome}}</h2>
+            <p>{{info.preco | numeroPreco}}</p>
+            <button class="delete" @click="removerItem(index)">
+              <img src="@/assets/remove.svg" alt="deletar item">
+            </button>
+          </div>
+          </div>
         </div>
+        <input type="checkbox">
       </section>
     </div>
   </header>
@@ -53,11 +60,9 @@ export default {
       if(target === currentTarget) {
       this.carrinhoAtivo = false
     }
-    }
-  },
-    filters: {
-    numeroPreco(valor) {
-      return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
+    },
+    removerItem(index) {
+      this.carrinho.splice(index, 1)
     }
   }
 }
@@ -107,5 +112,37 @@ margin-left: 10px;
   height: 80%;
   background: white;
   position: relative;
+}
+
+.modal_carrinho .carrinho_content .carrinho_item {
+  display:flex;
+}
+
+.modal_carrinho .carrinho_content .carrinho_item .item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal_carrinho .carrinho_content .carrinho_item .item h2 {
+  font-size: 1.2rem;
+  margin-left: 10px;
+}
+
+.modal_carrinho .carrinho_content .carrinho_item .item .delete {
+  background-color: #00bfff;
+  margin-right: 10px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+}
+
+.modal_carrinho .carrinho_content .carrinho_item .item .delete img {
+  width:12px;
 }
 </style>

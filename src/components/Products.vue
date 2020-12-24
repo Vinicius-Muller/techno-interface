@@ -90,11 +90,6 @@ export default {
       this.modalActive = false
       this.carrinho.push(this.modal);
     }
-  },
-  filters: {
-    numeroPreco(valor) {
-      return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
-    }
   }
 }
 </script>
@@ -157,7 +152,7 @@ export default {
 
 .modal-content .price-box p {
   font-size: 1.4rem;
-  color: orange;
+  color: #00bfff;
 }
 
 .modal-content .price-box .buy {
@@ -165,18 +160,18 @@ export default {
   height: 40px;
   margin-top: 50px;
   border-radius: 5px;
-  border:1px solid orange;
+  border:1px solid #00bfff;
   font-size: 1.3rem;
   cursor: pointer;
-  background-color: orange;
+  background-color: #00bfff;
   color: white;
   transition: 0.2s all;
 }
 
 .modal-content .price-box .buy:hover {
   background-color: white;
-  color: orange;
-  border:1px solid orange;
+  color: #00bfff;
+  border:1px solid #00bfff;
 }
 
 .produtos {

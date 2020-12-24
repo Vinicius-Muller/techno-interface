@@ -4,6 +4,10 @@ import VueSplide from '@splidejs/vue-splide';
 
 Vue.use( VueSplide );
 
+  Vue.filter('numeroPreco', function(valor) {
+    return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
+  }
+  )
 
 Vue.config.productionTip = false
 
