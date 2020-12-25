@@ -21,15 +21,15 @@
           </div>
         </div>
         <div style="display:flex;">
-        <div style="display:flex; flex-direction:column; align-items: center; margin-left:130px;">
-          <input type="checkbox">
+        <div style="display:flex; flex-direction:column; align-items: center; margin-left:200px; margin-top:30px;">
+          <input style="cursor:pointer;" type="checkbox">
           <img class="card" src="@/assets/visa.svg" alt="pague com visa">
         </div>
-        <div style="display:flex; flex-direction:column; align-items: center; margin-left:30px;">
-          <input type="checkbox">
+        <div style="display:flex; flex-direction:column; align-items: center; margin-left:30px; margin-top:30px;">
+          <input style="cursor:pointer;" type="checkbox">
           <img class="card" src="@/assets/mastercard.svg" alt="pague com mastercard">
         </div>
-        <p style="margin-left:220px;">Total | {{carrinhoTotal | numeroPreco}}</p>
+        <p style="margin-left:400px;">Total | {{carrinhoTotal | numeroPreco}}</p>
         </div>
         <div style="display:flex; justify-content:center;">
         <button class="buy">Comprar</button>
@@ -76,7 +76,7 @@ export default {
     },
     removerItem(index) {
       this.carrinho.splice(index, 1)
-    }
+    },
   }
 }
 </script>
@@ -130,8 +130,8 @@ margin-left: 10px;
 }
 
 .modal_carrinho .carrinho_content .card {
-  width:50px;
-  height: 30px;
+  width:60px;
+  height:40px;
 }
 
 .modal_carrinho .carrinho_content .buy {
@@ -143,7 +143,7 @@ margin-left: 10px;
   font-size: 1.4rem;
   color: white;
   background-color: #00bfff;
-  margin-top: 50px;
+  margin-top: 20px;
   transition: 0.3s all;
 }
 

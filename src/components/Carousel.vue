@@ -19,7 +19,7 @@ import '@splidejs/splide/dist/css/themes/splide-skyblue.min.css';
           gap    : '1rem',
         },
       };
-    },
+    }
   }
 </script>
 
