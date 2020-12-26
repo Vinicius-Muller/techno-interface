@@ -15,13 +15,13 @@
       </div>
 
       <div v-if="modalActive" class="modal" v-bind="{modal}" @click="fecharModal">
-        <div class="modal-content">
+        <div class="modal-conteudo">
           <img @click="fecharModal" class="close" src="@/assets/cancel.svg" alt="fechar modal">
           <img :src="require(`@/assets/produtos/${modal.img}`)" :alt="modal.nome">
-          <div class="price-box">
+          <div class="preco-caixa">
             <h2>{{modal.nome}}</h2>
             <p>{{modal.preco | numeroPreco}}</p>
-            <button @click="Comprar()" class="buy">Comprar</button>
+            <button @click="Comprar()" class="comprar">Comprar</button>
           </div>
         </div>
       </div>
@@ -109,7 +109,7 @@ export default {
   background: rgba(0, 0, 0, .8);
 }
 
-.modal-content {
+.modal-conteudo {
   position: relative;
   display: flex;
   align-items: center;
@@ -119,7 +119,7 @@ export default {
   background: linear-gradient(to right, black 250px, white 250px);
 }
 
-.modal-content .close {
+.modal-conteudo .close {
   width:30px;
   height:30px;
   position: absolute;
@@ -129,33 +129,33 @@ export default {
   transition: 0.2s all;
 }
 
-.modal-content .close:hover {
+.modal-conteudo .close:hover {
   transform: scale(1.1);
 }
 
-.modal-content img {
+.modal-conteudo img {
   width: 60%;
   height: 80%;
 }
 
-.modal-content .price-box {
+.modal-conteudo .preco-caixa {
   width: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.modal-content .price-box h2 {
+.modal-conteudo .preco-caixa h2 {
   font-size: 2rem;
   letter-spacing: 2px;
 }
 
-.modal-content .price-box p {
+.modal-conteudo .preco-caixa p {
   font-size: 1.4rem;
   color: #00bfff;
 }
 
-.modal-content .price-box .buy {
+.modal-conteudo .preco-caixa .comprar {
   width: 50%;
   height: 40px;
   margin-top: 50px;
@@ -168,7 +168,7 @@ export default {
   transition: 0.2s all;
 }
 
-.modal-content .price-box .buy:hover {
+.modal-conteudo .preco-caixa .comprar:hover {
   background-color: white;
   color: #00bfff;
   border:1px solid #00bfff;
@@ -204,4 +204,59 @@ export default {
   color: rgba(0, 0, 0, .5);
 }
 
+@media screen and (max-width:800px) {
+  .produtos {
+    width: 60%;
+  }
+
+  .produto {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .produto_img {
+    margin: 0;
+    margin-bottom: 20px;
+  }
+
+  .produto_info {
+    display:flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .modal-conteudo {
+    flex-direction: column;
+    width: 90%;
+    padding: 20px;
+  }
+
+  .modal-conteudo img {
+    width: 80%;
+  }
+
+  .modal-conteudo .preco-caixa h2 {
+    color: #00bfff;;
+  }
+
+  .modal-conteudo .preco-caixa .comprar {
+    margin-top: 10px;
+    width: 80%;
+  }
+}
+
+@media screen and (max-width:470px) {
+  .produtos {
+    width: 90%;
+    margin-top: 50px;
+  }
+
+  .produto_titulo {
+    font-size: 2.5rem;
+  }
+
+  .produto_preco {
+    font-size: 1.4rem;
+  }
+}
 </style>

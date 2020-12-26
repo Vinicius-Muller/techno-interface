@@ -1,5 +1,5 @@
 <template>
-  <splide :options="options" class="carousel_box">
+  <splide :options="options" class="carousel_caixa">
     <splide-slide v-for="(item, index) in carrinho" :key="index">
       <img :src="require(`@/assets/produtos/${item.img}`)">
     </splide-slide>
@@ -24,7 +24,7 @@ import '@splidejs/splide/dist/css/themes/splide-skyblue.min.css';
 </script>
 
 <style scoped>
- .carousel_box {
+ .carousel_caixa {
    width: 50%;
    margin-left: 10px;
    margin-top: 10px;

@@ -7,9 +7,9 @@
     </div>
 
     <div v-if="carrinhoAtivo" class="modal_carrinho" @click="fecharCarrinho">
-      <section class="carrinho_content">
+      <section class="carrinho_conteudo">
         <div class="carrinho_item">
-          <Carousel :carrinho="carrinho"/>
+          <Carousel v-if="carrinho.length >= 1" :carrinho="carrinho"/>
           <div style="width:50%; padding:10px;">
           <div class="item" v-for="(info, index) in carrinho" :key="index">
             <h2>{{info.nome}}</h2>
@@ -20,7 +20,7 @@
           </div>
           </div>
         </div>
-        <div style="display:flex;">
+        <div style="display:flex;" v-if="carrinho.length >= 1">
         <div style="display:flex; flex-direction:column; align-items: center; margin-left:200px; margin-top:30px;">
           <input style="cursor:pointer;" type="checkbox">
           <img class="card" src="@/assets/visa.svg" alt="pague com visa">
@@ -31,9 +31,10 @@
         </div>
         <p style="margin-left:400px;">Total | {{carrinhoTotal | numeroPreco}}</p>
         </div>
-        <div style="display:flex; justify-content:center;">
-        <button class="buy">Comprar</button>
+        <div style="display:flex; justify-conteudo:center; justify-content:center;">
+        <button v-if="carrinho.length >= 1" class="comprar">Comprar</button>
         </div>
+        <p class="vazio" v-if="carrinho.length == 0">O carrinho esta vazio</p>
       </section>
     </div>
   </header>
@@ -75,9 +76,19 @@ export default {
     }
     },
     removerItem(index) {
-      this.carrinho.splice(index, 1)
+      this.carrinho.splice(index, 1);
+       setTimeout(()=> {
+        this.carrinhoAtivo = false
+      }, 1)
+      setTimeout(()=> {
+        this.carrinhoAtivo = true
+      }, 1)
     },
-  }
+
+    recarregar() {
+     
+    }
+  },
 }
 </script>
 
@@ -118,23 +129,29 @@ margin-left: 10px;
   align-items: center;
 }
 
-.modal_carrinho .carrinho_content {
+.modal_carrinho .carrinho_conteudo {
   width: 80%;
   height: 80%;
   background: white;
   position: relative;
 }
 
-.modal_carrinho .carrinho_content .carrinho_item {
+.modal_carrinho .carrinho_conteudo .carrinho_item {
   display:flex;
 }
 
-.modal_carrinho .carrinho_content .card {
+.modal_carrinho .carrinho_conteudo .vazio {
+  font-size: 1.5rem;
+  margin-left: 33%;
+  margin-top: 30%;
+}
+
+.modal_carrinho .carrinho_conteudo .card {
   width:60px;
   height:40px;
 }
 
-.modal_carrinho .carrinho_content .buy {
+.modal_carrinho .carrinho_conteudo .comprar {
   width: 30%;
   height: 50px;
   cursor: pointer;
@@ -147,23 +164,23 @@ margin-left: 10px;
   transition: 0.3s all;
 }
 
-.modal_carrinho .carrinho_content .buy:hover {
+.modal_carrinho .carrinho_conteudo .comprar:hover {
   color:#00bfff;
   background-color: white;
   border:1px solid #00bfff;
 }
 
-.modal_carrinho .carrinho_content .carrinho_item .item {
+.modal_carrinho .carrinho_conteudo .carrinho_item .item {
   display: flex;
   justify-content: space-between;
 }
 
-.modal_carrinho .carrinho_content .carrinho_item .item h2 {
+.modal_carrinho .carrinho_conteudo .carrinho_item .item h2 {
   font-size: 1.2rem;
   margin-left: 10px;
 }
 
-.modal_carrinho .carrinho_content .carrinho_item .item .delete {
+.modal_carrinho .carrinho_conteudo .carrinho_item .item .delete {
   background-color: #00bfff;
   margin-right: 10px;
   display:flex;
@@ -177,7 +194,7 @@ margin-left: 10px;
   cursor: pointer;
 }
 
-.modal_carrinho .carrinho_content .carrinho_item .item .delete img {
+.modal_carrinho .carrinho_conteudo .carrinho_item .item .delete img {
   width:12px;
 }
 </style>
