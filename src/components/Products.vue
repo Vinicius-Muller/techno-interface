@@ -232,7 +232,8 @@ export default {
   }
 
   .modal-conteudo img {
-    width: 80%;
+    width: 100%;
+    object-fit:cover;
   }
 
   .modal-conteudo .preco-caixa h2 {

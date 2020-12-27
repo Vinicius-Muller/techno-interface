@@ -32,4 +32,13 @@ import '@splidejs/splide/dist/css/themes/splide-skyblue.min.css';
    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
  }
 
+
+ @media screen and (max-width:900px) {
+   .carousel_caixa {
+     width: 90%;
+     margin: 0;
+     margin-top: 20px;
+   }
+ }
+
 </style>

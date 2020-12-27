@@ -10,7 +10,7 @@
       <section class="carrinho_conteudo">
         <div class="carrinho_item">
           <Carousel v-if="carrinho.length >= 1" :carrinho="carrinho"/>
-          <div style="width:50%; padding:10px;">
+          <div class="item_caixa">
           <div class="item" v-for="(info, index) in carrinho" :key="index">
             <h2>{{info.nome}}</h2>
             <p>{{info.preco | numeroPreco}}</p>
@@ -20,18 +20,18 @@
           </div>
           </div>
         </div>
-        <div style="display:flex;" v-if="carrinho.length >= 1">
-        <div style="display:flex; flex-direction:column; align-items: center; margin-left:200px; margin-top:30px;">
+        <div class="cartao_secao" v-if="carrinho.length >= 1">
+        <div class="cartao_caixa">
           <input style="cursor:pointer;" type="checkbox">
           <img class="card" src="@/assets/visa.svg" alt="pague com visa">
         </div>
-        <div style="display:flex; flex-direction:column; align-items: center; margin-left:30px; margin-top:30px;">
+        <div class="cartao_caixa">
           <input style="cursor:pointer;" type="checkbox">
           <img class="card" src="@/assets/mastercard.svg" alt="pague com mastercard">
         </div>
-        <p style="margin-left:400px;">Total | {{carrinhoTotal | numeroPreco}}</p>
+        <p class="carrinho_total">Total | {{carrinhoTotal | numeroPreco}}</p>
         </div>
-        <div style="display:flex; justify-conteudo:center; justify-content:center;">
+        <div class="botao_caixa">
         <button v-if="carrinho.length >= 1" class="comprar">Comprar</button>
         </div>
         <p class="vazio" v-if="carrinho.length == 0">O carrinho esta vazio</p>
@@ -122,7 +122,7 @@ margin-left: 10px;
   position: fixed;
   z-index: 2;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   background:rgba(0, 0, 0, 0.8);
   display:flex;
   justify-content: center;
@@ -136,8 +136,36 @@ margin-left: 10px;
   position: relative;
 }
 
+.modal_carrinho .carrinho_conteudo .cartao_secao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal_carrinho .carrinho_conteudo .cartao_secao .carrinho_total {
+  margin-left: 450px;
+}
+
+.modal_carrinho .carrinho_conteudo .cartao_secao .cartao_caixa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal_carrinho .carrinho_conteudo .botao_caixa {
+  display:flex;
+  justify-content:center;
+}
+
 .modal_carrinho .carrinho_conteudo .carrinho_item {
   display:flex;
+}
+
+.modal_carrinho .carrinho_conteudo .carrinho_item .item_caixa {
+  padding: 10px;
+  display:flex;
+  flex-direction: column;
+  width: 50%;
 }
 
 .modal_carrinho .carrinho_conteudo .vazio {
@@ -161,6 +189,7 @@ margin-left: 10px;
   color: white;
   background-color: #00bfff;
   margin-top: 20px;
+  margin-bottom: 20px;
   transition: 0.3s all;
 }
 
@@ -196,5 +225,44 @@ margin-left: 10px;
 
 .modal_carrinho .carrinho_conteudo .carrinho_item .item .delete img {
   width:12px;
+}
+
+@media screen and (max-width:900px) {
+  .carrinho_total {
+    margin-left: 200px !important;
+  }
+
+  .modal_carrinho .carrinho_conteudo .carrinho_item {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal_carrinho .carrinho_conteudo .carrinho_item .item_caixa {
+    width: 90%;
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  .modal_carrinho .carrinho_conteudo .comprar {
+    margin-top: 0;
+    margin-bottom: 20px;
+    width: 40%;
+  }
+}
+
+@media screen and (max-width:390px) {
+  .carrinho_total {
+    margin-left: 0px !important;
+  }
+
+  .modal_carrinho .carrinho_conteudo .comprar {
+    width: 60%;
+    margin-top: 20px;
+  }
+
+  .modal_carrinho .carrinho_conteudo {
+    width: 90%;
+    height: 90%;
+  }
 }
 </style>
