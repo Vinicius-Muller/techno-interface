@@ -10,7 +10,7 @@
       <section class="carrinho_conteudo">
         <div class="carrinho_item">
           <Carousel v-if="carrinho.length >= 1" :carrinho="carrinho"/>
-          <div class="item_caixa">
+          <div v-if="carrinho.length >= 1" class="item_caixa">
           <div class="item" v-for="(info, index) in carrinho" :key="index">
             <h2>{{info.nome}}</h2>
             <p>{{info.preco | numeroPreco}}</p>
@@ -37,6 +37,7 @@
         <p class="vazio" v-if="carrinho.length == 0">O carrinho esta vazio</p>
       </section>
     </div>
+
   </header>
 </template>
 
@@ -130,7 +131,7 @@ margin-left: 10px;
 }
 
 .modal_carrinho .carrinho_conteudo {
-  width: 80%;
+  width: 60%;
   height: 80%;
   background: white;
   position: relative;
@@ -143,7 +144,7 @@ margin-left: 10px;
 }
 
 .modal_carrinho .carrinho_conteudo .cartao_secao .carrinho_total {
-  margin-left: 450px;
+  margin-left: 280px;
 }
 
 .modal_carrinho .carrinho_conteudo .cartao_secao .cartao_caixa {
@@ -171,7 +172,7 @@ margin-left: 10px;
 .modal_carrinho .carrinho_conteudo .vazio {
   font-size: 1.5rem;
   margin-left: 33%;
-  margin-top: 30%;
+  padding:20px;
 }
 
 .modal_carrinho .carrinho_conteudo .card {

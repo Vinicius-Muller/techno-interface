@@ -28,4 +28,12 @@ html {
 body {
    background: linear-gradient(to right, #1a1a1a 30%, #ffffff 30%);
 }
+
+.v-enter-active, .v-leave-active {
+  transition: opacity 0.2s;
+}
+
+.v-enter, .v-leave-to {
+  opacity: 0;
+}
 </style>

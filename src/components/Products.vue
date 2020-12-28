@@ -13,7 +13,7 @@
         </div>
         
       </div>
-
+      <transition>
       <div v-if="modalActive" class="modal" v-bind="{modal}" @click="fecharModal">
         <div class="modal-conteudo">
           <img @click="fecharModal" class="close" src="@/assets/cancel.svg" alt="fechar modal">
@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-
+      </transition>
    </section>
 </div>
 </template>
@@ -114,7 +114,7 @@ export default {
   display: flex;
   align-items: center;
   padding: 10px;
-  width: 80%;
+  width: 60%;
   height: 80%;
   background: linear-gradient(to right, black 250px, white 250px);
 }
@@ -136,6 +136,7 @@ export default {
 .modal-conteudo img {
   width: 60%;
   height: 80%;
+  object-fit: cover;
 }
 
 .modal-conteudo .preco-caixa {
